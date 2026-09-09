@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — FULLMedia Stream</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0c;--card:#17171a;--border:#2a2a2e;--orange:#f5834d;--text:#f4f4f5;--muted:#a1a1aa;--live:#e5484d;--ok:#30a46c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.5}
+.baloo{font-family:'Baloo 2'}
+.wrap{max-width:1000px;margin:0 auto;padding:20px}
+header{border-bottom:1px solid var(--border);background:#121214}
+.hbar{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo b{font-family:'Baloo 2';font-size:20px}.logo .med{color:var(--orange)}
+.btn{padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:14px}
+.btn-o{background:linear-gradient(135deg,var(--orange),#f2703a);color:#fff}
+.btn-g{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ok{background:var(--ok);color:#fff}
+.btn-rojo{background:transparent;border:1px solid rgba(229,72,77,.5);color:#ff6b70}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.item b{font-size:15px}
+.item small{color:var(--muted);display:block}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:1px;padding:3px 9px;border-radius:999px}
+.tag.pend{background:rgba(245,131,77,.15);color:var(--orange)}
+.tag.act{background:rgba(48,164,108,.18);color:#4cc38a}
+.tag.rech{background:rgba(229,72,77,.18);color:#ff6b70}
+h2{font-family:'Baloo 2';font-size:22px;margin:24px 0 14px}
+.sub{color:var(--muted);font-size:13.5px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}
+input{width:100%;max-width:360px;background:#0e0e10;border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px}
+.centrado{max-width:380px;margin:12vh auto;text-align:center}
+.centrado h1{font-family:'Baloo 2';margin-bottom:6px}
+#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#1f1f23;border:1px solid var(--border);border-radius:12px;padding:12px 20px;opacity:0;transition:.3s;pointer-events:none}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="hbar">
+    <a class="logo" href="index.html" style="text-decoration:none;color:var(--text)"><b>FULL<span class="med">media</span> STREAM</b> <span class="sub">· administración</span></a>
+    <button class="btn btn-g" id="btn-salir" style="display:none" onclick="salir()">Salir</button>
+  </div>
+</header>
+
+<!-- LOGIN ADMIN (cuenta semilla, no hay registro público) -->
+<div class="centrado" id="login">
+  <h1>Panel de administración</h1>
+  <p class="sub" style="margin-bottom:18px">Acceso reservado.<br><b>DEMO:</b> admin@fullmedia.com.ar · clave <b>fullmedia2025</b></p>
+  <label>Email</label><input type="email" id="a-email" value="admin@fullmedia.com.ar">
+  <label>Clave</label><input type="password" id="a-clave" value="fullmedia2025">
+  <button class="btn btn-o" style="width:100%;margin-top:16px" onclick="loginAdmin()">Ingresar</button>
+</div>
+
+<div class="wrap" id="panel" style="display:none">
+  <h2>🏢 Productoras</h2>
+  <p class="sub" style="margin-bottom:12px">Las solicitudes quedan pendientes hasta que las apruebes. Al aprobar, se le emite su clave RTMP.</p>
+  <div class="card" id="lista-prod"></div>
+
+  <h2>👥 Usuarios registrados</h2>
+  <div class="card" id="lista-usuarios"></div>
+
+  <h2>📺 Eventos</h2>
+  <p class="sub" style="margin-bottom:12px">Los base de la demo + los creados por productoras.</p>
+  <div class="card" id="lista-eventos"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const ADMIN = {email:'admin@fullmedia.com.ar', clave:'fullmedia2025'};
+const DB = {
+  get usuarios(){ return JSON.parse(localStorage.getItem('fm_usuarios') || '[]'); },
+  get prod(){ return JSON.parse(localStorage.getItem('fm_prod') || '[]'); },
+  set prod(v){ localStorage.setItem('fm_prod', JSON.stringify(v)); },
+  get eventos(){ return JSON.parse(localStorage.getItem('fm_eventos') || '[]'); },
+  get tickets(){ return JSON.parse(localStorage.getItem('fm_tickets') || '{}'); }
+};
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3200); }
+
+function loginAdmin(){
+  if(document.getElementById('a-email').value.trim().toLowerCase() === ADMIN.email &&
+     document.getElementById('a-clave').value === ADMIN.clave){
+    sessionStorage.setItem('fm_admin','1');
+    mostrarPanel();
+  } else { toast('Credenciales incorrectas'); }
+}
+function salir(){ sessionStorage.removeItem('fm_admin'); location.reload(); }
+
+function mostrarPanel(){
+  document.getElementById('login').style.display='none';
+  document.getElementById('panel').style.display='block';
+  document.getElementById('btn-salir').style.display='inline-block';
+  renderProd(); renderUsuarios(); renderEventos();
+}
+
+function renderProd(){
+  const prods = DB.prod;
+  document.getElementById('lista-prod').innerHTML = !prods.length
+    ? '<p class="sub">Todavía no hay solicitudes de productoras. Probá registrando una desde la home ("Quiero transmitir").</p>'
+    : prods.map((p,i) => `<div class="item">
+        <div><b>${p.nombre}</b><small>${p.email} · ${p.resp||'—'} · ${p.tel||'—'}</small>
+        <small>${p.contenidos||''}</small></div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="tag ${p.estado==='activa'?'act':(p.estado==='pendiente'?'pend':'rech')}">${p.estado.toUpperCase()}</span>
+          ${p.estado==='pendiente' ? `<button class="btn btn-ok" onclick="aprobar(${i})">Aprobar</button>
+                                       <button class="btn btn-rojo" onclick="rechazar(${i})">Rechazar</button>` : ''}
+          ${p.estado==='activa' ? `<small style="color:var(--muted)">RTMP: rtmp://ingest.fullmedia.com.ar/live<br>Clave: <b style="color:var(--orange)">${p.rtmpKey}</b></small>` : ''}
+        </div>
+      </div>`).join('');
+}
+function aprobar(i){
+  const prods = DB.prod;
+  prods[i].estado = 'activa';
+  prods[i].rtmpKey = 'fm_' + Math.random().toString(36).slice(2,10);
+  DB.prod = prods;
+  toast('Productora aprobada ✔ Se emitió su clave RTMP');
+  renderProd();
+}
+function rechazar(i){
+  const prods = DB.prod;
+  prods[i].estado = 'rechazada';
+  DB.prod = prods;
+  toast('Solicitud rechazada');
+  renderProd();
+}
+
+function renderUsuarios(){
+  const us = DB.usuarios, tk = DB.tickets;
+  document.getElementById('lista-usuarios').innerHTML = !us.length
+    ? '<p class="sub">Todavía no hay usuarios registrados.</p>'
+    : us.map(u => `<div class="item">
+        <div><b>${u.nombre} ${u.apellido||''}</b><small>${u.email} · ${u.tel||'sin WhatsApp'}</small></div>
+        <div><small>${(tk[u.email]||[]).length} ticket(s) · rol: ${u.rol||'usuario'}</small></div>
+      </div>`).join('');
+}
+
+function renderEventos(){
+  const base = [
+    {t1:"Atlético Central",t2:"Defensores del Norte",torneo:"LIGA INTERPROVINCIAL",cat:"Primera",precio:4000},
+    {t1:"Riverside",t2:"Old Boys",torneo:"LIGA DE BÁSQUET",cat:"Básquet",precio:3500},
+    {t1:"Club Belgrano",t2:"Sp. Independencia",torneo:"TORNEO JUVENIL",cat:"Sub-17",precio:3000},
+    {t1:"Dep. Sur",t2:"Unión Oeste",torneo:"LIGA FEMENINA",cat:"Femenino",precio:3000},
+    {t1:"Hockey Club",t2:"Las Halcones",torneo:"LIGA DE HOCKEY",cat:"Damas",precio:2500},
+  ];
+  const propios = DB.eventos;
+  document.getElementById('lista-eventos').innerHTML =
+    base.map(e => `<div class="item"><div><b>${e.t1} vs ${e.t2}</b><small>${e.torneo} · ${e.cat}</small></div><span class="tag act">DEMO BASE</span></div>`).join('') +
+    (!propios.length ? '<p class="sub" style="margin-top:8px">Los eventos creados por productoras van a aparecer acá.</p>'
+      : propios.map(e => `<div class="item"><div><b>${e.t1} vs ${e.t2}</b><small>${e.torneo} · ${e.cat} · $${e.precio.toLocaleString('es-AR')}</small></div><span class="tag ${e.vivo?'rech':'act'}">${e.vivo?'EN VIVO':'PROGRAMADO'}</span></div>`).join(''));
+}
+if(sessionStorage.getItem('fm_admin')) mostrarPanel();
+</script>
+</body>
+</html>

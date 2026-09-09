@@ -15,8 +15,6 @@
 body{background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; line-height:1.5}
 h1,h2,h3,.baloo{font-family:'Baloo 2',system-ui,sans-serif}
 .container{max-width:1150px; margin:0 auto; padding:0 20px}
-
-/* ===== HEADER ===== */
 header{position:sticky; top:0; z-index:50; background:rgba(11,11,12,.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--border)}
 .hbar{display:flex; align-items:center; justify-content:space-between; height:68px}
 .logo{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
@@ -27,8 +25,6 @@ nav{display:flex; align-items:center; gap:26px}
 nav a{color:var(--muted); text-decoration:none; font-size:15px; font-weight:500}
 nav a:hover{color:#fff}
 @media(max-width:760px){ nav a{display:none} }
-
-/* ===== BOTONES ===== */
 .btn{display:inline-block; padding:13px 26px; border-radius:12px; border:none; cursor:pointer; font-size:16px; font-weight:700; text-decoration:none; text-align:center; transition:.2s}
 .btn-o{background:linear-gradient(135deg,var(--orange),#f2703a); color:#fff; box-shadow:0 6px 20px rgba(245,131,77,.25)}
 .btn-o:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(245,131,77,.35)}
@@ -37,8 +33,6 @@ nav a:hover{color:#fff}
 .btn-sm{padding:9px 16px; font-size:14px; border-radius:10px}
 .btn-rojo{background:transparent; border:1px solid rgba(229,72,77,.5); color:#ff6b70}
 .btn-rojo:hover{background:rgba(229,72,77,.12)}
-
-/* ===== HERO ===== */
 .hero{display:grid; grid-template-columns:1.15fr 1fr; gap:44px; padding:52px 0 48px; align-items:center}
 @media(max-width:860px){ .hero{grid-template-columns:1fr; padding:34px 0} }
 .badge{display:inline-flex; align-items:center; gap:8px; background:rgba(245,131,77,.12); color:var(--orange); border:1px solid rgba(245,131,77,.4); padding:6px 14px; border-radius:999px; font-size:13px; font-weight:600; letter-spacing:.5px}
@@ -67,8 +61,6 @@ nav a:hover{color:#fff}
 .escudo{clip-path:polygon(50% 0%,100% 13%,100% 58%,50% 100%,0% 58%,0% 13%); display:flex; align-items:center; justify-content:center; font-family:'Baloo 2'; font-weight:800; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.5); filter:drop-shadow(0 6px 14px rgba(0,0,0,.4)); flex:none}
 .esc-sm{width:52px; height:60px; font-size:18px}
 .esc-g{width:clamp(88px,11vw,130px); height:clamp(102px,13vw,150px); font-size:clamp(30px,4vw,44px)}
-
-/* ===== FRANJA HOY ===== */
 .franja{background:linear-gradient(135deg, rgba(229,72,77,.1), rgba(245,131,77,.06)); border:1px solid rgba(229,72,77,.4); border-radius:16px; padding:16px 18px; margin-bottom:30px}
 .fh-titulo{font-family:'Baloo 2'; font-size:19px; font-weight:800; color:#ff6b70; margin-bottom:12px; display:flex; align-items:center; gap:10px}
 .fh-titulo small{color:var(--muted); font-weight:400; font-family:inherit; font-size:13px}
@@ -82,8 +74,6 @@ nav a:hover{color:#fff}
 .fh-cat{color:var(--muted); font-size:12.5px}
 .fh-mirando{color:var(--muted); font-size:12.5px}
 @media(max-width:700px){ .fh-cat,.fh-mirando{display:none} }
-
-/* ===== SECCIONES ===== */
 section{padding:50px 0}
 .sec-head{display:flex; justify-content:space-between; align-items:end; margin-bottom:20px}
 .sec-head h2{font-size:29px; font-weight:800}
@@ -98,8 +88,6 @@ section{padding:50px 0}
 .live-title{display:flex; align-items:center; gap:10px; font-family:'Baloo 2'; font-size:22px; color:#ff6b70; margin-bottom:16px}
 .live-title .dot{width:10px; height:10px; background:var(--live)}
 .live-title small{color:var(--muted); font-family:inherit; font-weight:400; font-size:13.5px}
-
-/* ===== TARJETAS ===== */
 .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(275px,1fr)); gap:18px}
 .card{background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:.2s; display:flex; flex-direction:column}
 .card:hover{transform:translateY(-3px); border-color:rgba(245,131,77,.55); box-shadow:0 12px 30px rgba(0,0,0,.4)}
@@ -121,8 +109,6 @@ section{padding:50px 0}
 .mirando{font-size:12.5px; color:var(--muted); margin:10px 16px 0}
 .card-foot{display:flex; justify-content:space-between; align-items:center; padding:12px 16px 15px; gap:10px}
 .precio{font-family:'Baloo 2'; font-size:21px; color:var(--orange)}
-
-/* ===== RESTO ===== */
 .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
 @media(max-width:760px){ .steps{grid-template-columns:1fr} }
 .step{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px}
@@ -142,6 +128,7 @@ footer{border-top:1px solid var(--border); padding:42px 0 90px; color:var(--mute
 footer a{color:var(--muted); text-decoration:none; display:block; padding:3px 0}
 footer a:hover{color:var(--orange)}
 .copy{margin-top:30px; font-size:12.5px; color:#55555c}
+.copy a{color:#55555c}
 .wa{position:fixed; bottom:22px; right:22px; width:58px; height:58px; border-radius:50%; background:#25d366; display:flex; align-items:center; justify-content:center; z-index:80; box-shadow:0 6px 20px rgba(0,0,0,.4); text-decoration:none}
 .wa svg{width:30px; height:30px; fill:#fff}
 .demo-switch{position:fixed; bottom:22px; left:22px; z-index:85; background:#141416; border:1px solid var(--border); border-radius:12px; padding:8px 10px; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted)}
@@ -154,8 +141,6 @@ footer a:hover{color:var(--orange)}
 .notif .campana{font-size:22px}
 .notif .cerrar{background:none; border:none; color:var(--muted); font-size:18px; cursor:pointer; position:absolute; right:14px; top:10px}
 @media(max-width:760px){ .notif small{display:none} }
-
-/* ===== MODALES ===== */
 .modal{position:fixed; inset:0; background:rgba(0,0,0,.72); display:none; align-items:center; justify-content:center; padding:18px; z-index:100}
 .modal.open{display:flex}
 .mbox{background:#141416; border:1px solid var(--border); border-radius:18px; width:100%; max-width:440px; padding:28px; position:relative; max-height:92vh; overflow-y:auto}
@@ -163,8 +148,8 @@ footer a:hover{color:var(--orange)}
 .mbox .sub{color:var(--muted); font-size:14px; margin-bottom:18px}
 .mclose{position:absolute; top:14px; right:16px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer}
 label{display:block; font-size:13px; color:var(--muted); margin:10px 0 5px}
-input,textarea{width:100%; background:#0e0e10; border:1px solid var(--border); border-radius:10px; padding:12px 14px; color:var(--text); font-size:15px; margin-bottom:4px}
-input:focus,textarea:focus{outline:none; border-color:var(--orange)}
+input,textarea,select{width:100%; background:#0e0e10; border:1px solid var(--border); border-radius:10px; padding:12px 14px; color:var(--text); font-size:15px; margin-bottom:4px}
+input:focus,textarea:focus,select:focus{outline:none; border-color:var(--orange)}
 .chk{display:flex; gap:9px; align-items:flex-start; font-size:13.5px; color:var(--muted); margin:14px 0}
 .chk input{width:auto; margin-top:3px}
 .chk a{color:var(--orange)}
@@ -305,7 +290,9 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
       <b style="color:var(--text)">Plataforma</b>
       <a href="#eventos">Eventos</a>
       <a href="#repeticiones">Repeticiones</a>
-      <a href="#" onclick="abrir('modal-productora'); return false">Para productoras</a>
+      <a href="productora.html">Panel de productoras</a>
+      <!-- SOLO DEMO: en producción este link vive en una URL privada, no en la home -->
+      <a href="admin.html" style="opacity:.55">Administración (demo)</a>
     </div>
   </div>
   <div class="container copy">© 2025 FULLMedia Stream · fullmedia.com.ar · Todos los derechos de transmisión pertenecen a sus respectivos clubes y productoras autorizadas.</div>
@@ -328,7 +315,7 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
   <button class="cerrar" onclick="cerrarNotif()">✕</button>
 </div>
 
-<!-- MODAL: INGRESAR (email + clave) -->
+<!-- MODAL: INGRESAR USUARIO -->
 <div class="modal" id="modal-ingresar">
   <div class="mbox">
     <button class="mclose" onclick="cerrar('modal-ingresar')">✕</button>
@@ -340,7 +327,8 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
       <label>Clave</label>
       <input type="password" placeholder="Tu clave" id="login-clave">
       <button class="btn btn-o btn-full" onclick="loginValidar()">Ingresar</button>
-      <p class="switch">¿No tenés cuenta? <a onclick="cerrar('modal-ingresar'); abrir('modal-usuario')">Creála acá</a></p>
+      <p class="switch">¿No tenés cuenta? <a onclick="cerrar('modal-ingresar'); abrir('modal-usuario')">Creála acá</a><br>
+      ¿Sos productora? <a href="productora.html">Entrá al panel de productoras</a></p>
     </div>
     <div class="mstep" data-step="2">
       <div class="ok-ico">✅</div>
@@ -350,12 +338,12 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
   </div>
 </div>
 
-<!-- MODAL: REGISTRO (email + clave) -->
+<!-- MODAL: REGISTRO USUARIO -->
 <div class="modal" id="modal-usuario">
   <div class="mbox">
     <button class="mclose" onclick="cerrar('modal-usuario')">✕</button>
     <h3>Crear cuenta</h3>
-    <p class="sub">Un minuto, una sola vez. Después entrás con tu email y clave.</p>
+    <p class="sub">Para comprar tickets y mirar. Un minuto, una sola vez.</p>
     <div class="mstep on" data-step="1">
       <label>Nombre</label><input type="text" placeholder="Tu nombre" id="reg-nombre">
       <label>Apellido</label><input type="text" placeholder="Tu apellido" id="reg-apellido">
@@ -363,12 +351,6 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
       <label>Clave (mínimo 6 caracteres)</label><input type="password" placeholder="Elegí una clave" id="reg-clave">
       <label>Repetí la clave</label><input type="password" placeholder="Otra vez, igual" id="reg-clave2">
       <label>WhatsApp (opcional — para avisarte cuando empiece el evento)</label><input type="tel" placeholder="Ej: 11 2345 6789" id="reg-tel">
-      <label>¿Qué te gusta mirar? (opcional)</label>
-      <div class="chips" style="margin:6px 0 0">
-        <button class="chip" data-g="futbol" onclick="this.classList.toggle('on')">⚽ Fútbol</button>
-        <button class="chip" data-g="basquet" onclick="this.classList.toggle('on')">🏀 Básquet</button>
-        <button class="chip" data-g="hockey" onclick="this.classList.toggle('on')">🏑 Hockey</button>
-      </div>
       <div class="chk"><input type="checkbox" id="chk1"><label for="chk1" style="margin:0">Leí y acepto los <a onclick="abrir('modal-tyc')">Términos y la política de reembolsos</a></label></div>
       <button class="btn btn-o btn-full" onclick="registroCrear()">Crear mi cuenta</button>
       <p class="switch">¿Ya tenés cuenta? <a onclick="cerrar('modal-usuario'); abrir('modal-ingresar')">Ingresá</a></p>
@@ -381,6 +363,30 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
   </div>
 </div>
 
+<!-- MODAL: REGISTRO PRODUCTORA (crea cuenta PENDIENTE de aprobación) -->
+<div class="modal" id="modal-productora">
+  <div class="mbox">
+    <button class="mclose" onclick="cerrar('modal-productora')">✕</button>
+    <h3>Registro de productora</h3>
+    <p class="sub">Tu solicitud queda pendiente hasta que el administrador la habilite. Te contactamos por WhatsApp.</p>
+    <div class="mstep on" data-step="1">
+      <label>Nombre comercial</label><input type="text" placeholder="Ej: Producciones del Valle" id="prod-nombre">
+      <label>CUIT (opcional)</label><input type="text" placeholder="30-12345678-9" id="prod-cuit">
+      <label>Responsable</label><input type="text" placeholder="Nombre y apellido" id="prod-resp">
+      <label>Email</label><input type="email" placeholder="contacto@tuproduccion.com" id="prod-email">
+      <label>Clave (mínimo 6 caracteres)</label><input type="password" placeholder="Elegí una clave" id="prod-clave">
+      <label>WhatsApp de contacto</label><input type="tel" placeholder="Ej: 11 2345 6789" id="prod-tel">
+      <label>¿Qué contenidos producís?</label><textarea rows="2" placeholder="Ej: fútbol de la liga local, básquet, hockey..." id="prod-cont"></textarea>
+      <button class="btn btn-o btn-full" onclick="registroProductora()">Enviar solicitud</button>
+    </div>
+    <div class="mstep" data-step="2">
+      <div class="ok-ico">🐝</div>
+      <p class="ok-txt" id="prod-ok-txt">¡Solicitud enviada!</p>
+      <button class="btn btn-o btn-full" onclick="cerrar('modal-productora')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL: MIS EVENTOS -->
 <div class="modal" id="modal-miseventos">
   <div class="mbox">
@@ -389,29 +395,6 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
     <p class="sub">Tus tickets y accesos.</p>
     <div id="me-lista"></div>
     <button class="btn btn-rojo btn-full" onclick="cerrarSesion()">Cerrar sesión</button>
-  </div>
-</div>
-
-<!-- MODAL: PRODUCTORA -->
-<div class="modal" id="modal-productora">
-  <div class="mbox">
-    <button class="mclose" onclick="cerrar('modal-productora')">✕</button>
-    <h3>Registro de productora</h3>
-    <p class="sub">Revisamos cada solicitud para cuidar la calidad de la plataforma.</p>
-    <div class="mstep on" data-step="1">
-      <label>Nombre comercial</label><input type="text" placeholder="Ej: Producciones del Valle">
-      <label>CUIT (opcional)</label><input type="text" placeholder="30-12345678-9">
-      <label>Responsable</label><input type="text" placeholder="Nombre y apellido">
-      <label>WhatsApp de contacto</label><input type="tel" placeholder="Ej: 11 2345 6789">
-      <label>Email</label><input type="email" placeholder="contacto@tuproduccion.com">
-      <label>¿Qué contenidos producís?</label><textarea rows="3" placeholder="Ej: fútbol de la liga local, básquet, hockey..."></textarea>
-      <button class="btn btn-o btn-full" onclick="paso('modal-productora',2)">Enviar solicitud</button>
-    </div>
-    <div class="mstep" data-step="2">
-      <div class="ok-ico">🐝</div>
-      <p class="ok-txt">¡Solicitud enviada!<br>Te contactamos por WhatsApp para habilitarte.</p>
-      <button class="btn btn-o btn-full" onclick="cerrar('modal-productora')">Cerrar</button>
-    </div>
   </div>
 </div>
 
@@ -457,25 +440,29 @@ input:focus,textarea:focus{outline:none; border-color:var(--orange)}
 <div id="toast"></div>
 
 <script>
-/* ===== BASE LOCAL ===== */
+/* ===== BASE LOCAL (compartida entre index, admin y productora) ===== */
 const DB = {
   get usuarios(){ return JSON.parse(localStorage.getItem('fm_usuarios') || '[]'); },
   set usuarios(v){ localStorage.setItem('fm_usuarios', JSON.stringify(v)); },
   get tickets(){ return JSON.parse(localStorage.getItem('fm_tickets') || '{}'); },
   set tickets(v){ localStorage.setItem('fm_tickets', JSON.stringify(v)); },
+  get prod(){ return JSON.parse(localStorage.getItem('fm_prod') || '[]'); },
+  set prod(v){ localStorage.setItem('fm_prod', JSON.stringify(v)); },
+  get eventos(){ return JSON.parse(localStorage.getItem('fm_eventos') || '[]'); },
+  set eventos(v){ localStorage.setItem('fm_eventos', JSON.stringify(v)); },
   get sesion(){ return localStorage.getItem('fm_sesion'); },
   set sesion(em){ em ? localStorage.setItem('fm_sesion', em) : localStorage.removeItem('fm_sesion'); }
 };
 function usuarioActual(){ return DB.usuarios.find(u => u.email === DB.sesion) || null; }
 let comprarCtx = null;
 
-/* ===== DATOS ===== */
-const EVENTOS = [
-  {t1:"Atlético Central", t2:"Defensores del Norte", cat:"Primera", torneo:"LIGA INTERPROVINCIAL DE FÚTBOL", deporte:"futbol", dia:"Sáb", hora:"21:00", lugar:"Estadio Municipal", precio:4000, colA:"#c8102e", colB:"#f0b429", e1:"AC", e2:"DN", prod:"FULLMedia Producciones"},
-  {t1:"Riverside", t2:"Old Boys", cat:"Básquet", torneo:"LIGA DE BÁSQUET · APERTURA", deporte:"basquet", dia:"Mié", hora:"21:00", lugar:"Gimnasio Riverside", precio:3500, colA:"#ea580c", colB:"#0f766e", e1:"RI", e2:"OB", prod:"FULLMedia Producciones"},
-  {t1:"Club Belgrano", t2:"Sp. Independencia", cat:"Sub-17", torneo:"TORNEO JUVENIL", deporte:"futbol", dia:"Dom", hora:"15:00", lugar:"Cancha de Belgrano", precio:3000, colA:"#1e40af", colB:"#b91c1c", e1:"CB", e2:"SI", prod:"FULLMedia Producciones"},
-  {t1:"Dep. Sur", t2:"Unión Oeste", cat:"Femenino", torneo:"LIGA FEMENINA", deporte:"futbol", dia:"Dom", hora:"17:30", lugar:"Predio Dep. Sur", precio:3000, colA:"#7c3aed", colB:"#0d9488", e1:"DS", e2:"UO", prod:"FULLMedia Producciones"},
-  {t1:"Hockey Club", t2:"Las Halcones", cat:"Damas", torneo:"LIGA DE HOCKEY", deporte:"hockey", dia:"Vie", hora:"20:00", lugar:"Canchas Hockey Club", precio:2500, colA:"#059669", colB:"#be185d", e1:"HC", e2:"LH", prod:"FULLMedia Producciones"},
+/* ===== EVENTOS BASE (los "quemados" de la demo) ===== */
+const EVENTOS_BASE = [
+  {id:'base1', t1:"Atlético Central", t2:"Defensores del Norte", cat:"Primera", torneo:"LIGA INTERPROVINCIAL DE FÚTBOL", deporte:"futbol", dia:"Sáb", hora:"21:00", lugar:"Estadio Municipal", precio:4000, colA:"#c8102e", colB:"#f0b429", e1:"AC", e2:"DN", prod:"FULLMedia Producciones"},
+  {id:'base2', t1:"Riverside", t2:"Old Boys", cat:"Básquet", torneo:"LIGA DE BÁSQUET · APERTURA", deporte:"basquet", dia:"Mié", hora:"21:00", lugar:"Gimnasio Riverside", precio:3500, colA:"#ea580c", colB:"#0f766e", e1:"RI", e2:"OB", prod:"FULLMedia Producciones"},
+  {id:'base3', t1:"Club Belgrano", t2:"Sp. Independencia", cat:"Sub-17", torneo:"TORNEO JUVENIL", deporte:"futbol", dia:"Dom", hora:"15:00", lugar:"Cancha de Belgrano", precio:3000, colA:"#1e40af", colB:"#b91c1c", e1:"CB", e2:"SI", prod:"FULLMedia Producciones"},
+  {id:'base4', t1:"Dep. Sur", t2:"Unión Oeste", cat:"Femenino", torneo:"LIGA FEMENINA", deporte:"futbol", dia:"Dom", hora:"17:30", lugar:"Predio Dep. Sur", precio:3000, colA:"#7c3aed", colB:"#0d9488", e1:"DS", e2:"UO", prod:"FULLMedia Producciones"},
+  {id:'base5', t1:"Hockey Club", t2:"Las Halcones", cat:"Damas", torneo:"LIGA DE HOCKEY", deporte:"hockey", dia:"Vie", hora:"20:00", lugar:"Canchas Hockey Club", precio:2500, colA:"#059669", colB:"#be185d", e1:"HC", e2:"LH", prod:"FULLMedia Producciones"},
 ];
 const REPETICIONES = [
   {t1:"Atlético Central", t2:"Juventud Unida", cat:"Primera", torneo:"LIGA INTERPROVINCIAL", fecha:"Fecha 12", lugar:"Estadio Municipal", precio:2000, vence:"7 días", colA:"#0ea5e9", colB:"#0c4a6e", e1:"AC", e2:"JU", prod:"FULLMedia Producciones"},
@@ -486,16 +473,17 @@ const REPETICIONES = [
 /* ===== MODO DEMO ===== */
 let MODO = localStorage.getItem('fm-modo') || 'partido';
 function setModo(m){
-  MODO = m;
-  localStorage.setItem('fm-modo', m);
-  renderTodo();
+  MODO = m; localStorage.setItem('fm-modo', m); renderTodo();
   toast(m === 'partido' ? '🏠 Así se ve la home un sábado con partidos' : '🏠 Así se ve la home un día sin eventos');
 }
-function eventosVista(){
+/* Todos los eventos: los base (con estado demo) + los creados por productoras */
+function todosLosEventos(){
   const p = MODO === 'partido';
-  return EVENTOS.map((e,i) => ({...e, vivo: p && i === 0, hoy: p && i < 2, mirando: p && i === 0 ? 187 : 0}));
+  const base = EVENTOS_BASE.map((e,i) => ({...e, vivo: p && i === 0, hoy: p && i < 2, mirando: p && i === 0 ? 187 : 0}));
+  const deProd = DB.eventos; // ya tienen su estado vivo guardado
+  return [...base, ...deProd];
 }
-function fechaTxt(e){ return e.hoy ? 'HOY · ' + e.hora + ' hs' : e.dia + ' ' + e.hora; }
+function fechaTxt(e){ return e.hoy ? 'HOY · ' + e.hora + ' hs' : (e.fechaTxt || (e.dia ? e.dia + ' ' + e.hora : '')); }
 
 /* ===== FLYER ===== */
 function flyer(e, esRep){
@@ -512,13 +500,13 @@ function flyer(e, esRep){
     <div class="flyer-foot"><span>📅 ${fechaTxt(e)}</span><span>📍 ${e.lugar}</span></div>
   </div>`;
 }
-function tarjeta(e, i, esRep){
-  const btn = esRep ? `<button class="btn btn-g btn-sm" onclick="comprar(${i},true)">Ver ahora</button>`
-             : e.vivo ? `<button class="btn btn-o btn-sm" onclick="comprar(${i})">Comprar y mirar</button>`
-             : `<button class="btn btn-o btn-sm" onclick="comprar(${i})">Comprar</button>`;
+function tarjeta(e, esRep){
+  const btn = esRep ? `<button class="btn btn-g btn-sm" onclick="comprar('${e.id || 'rep'}', true)">Ver ahora</button>`
+             : e.vivo ? `<button class="btn btn-o btn-sm" onclick="comprar('${e.id}')">Comprar y mirar</button>`
+             : `<button class="btn btn-o btn-sm" onclick="comprar('${e.id}')">Comprar</button>`;
   return `<div class="card ${e.vivo ? 'ahora' : ''}">
     ${flyer(e, esRep)}
-    ${e.vivo ? `<p class="mirando">👥 ${e.mirando} personas lo están mirando</p>` : ''}
+    ${e.vivo ? `<p class="mirando">👥 ${e.mirando || 23} personas lo están mirando</p>` : ''}
     <div class="card-foot">
       <span class="precio">$${e.precio.toLocaleString('es-AR')}</span>
       ${btn}
@@ -535,36 +523,35 @@ document.querySelectorAll('#chips .chip').forEach(c => c.addEventListener('click
 }));
 function renderGrilla(){
   const q = (document.getElementById('buscador').value || '').toLowerCase().trim();
-  const es = eventosVista();
-  const prog = es.map((e,i)=>({e,i})).filter(x => !x.e.vivo
-    && (filtro === 'todos' || x.e.deporte === filtro)
-    && (x.e.t1 + ' ' + x.e.t2 + ' ' + x.e.torneo).toLowerCase().includes(q));
+  const prog = todosLosEventos().filter(e => !e.vivo
+    && (filtro === 'todos' || e.deporte === filtro)
+    && (e.t1 + ' ' + e.t2 + ' ' + e.torneo).toLowerCase().includes(q));
   document.getElementById('grid-eventos').innerHTML =
-    prog.map(x => tarjeta(x.e, x.i, false)).join('') ||
+    prog.map(e => tarjeta(e, false)).join('') ||
     '<p style="color:var(--muted)">No encontramos eventos con ese nombre. Probá con otro club.</p>';
 }
 function renderVivos(){
-  const vivos = eventosVista().map((e,i)=>({e,i})).filter(x => x.e.vivo);
+  const vivos = todosLosEventos().filter(e => e.vivo);
   const zona = document.getElementById('zona-vivos');
   zona.innerHTML = !vivos.length ? '' :
     `<h3 class="live-title"><span class="dot"></span> EN VIVO AHORA <small>· comprá y entrás al minuto</small></h3>
-     <div class="grid" style="margin-bottom:30px">${vivos.map(x => tarjeta(x.e, x.i, false)).join('')}</div>`;
+     <div class="grid" style="margin-bottom:30px">${vivos.map(e => tarjeta(e, false)).join('')}</div>`;
 }
 function renderFranja(){
   const zona = document.getElementById('franja-hoy');
   if(MODO !== 'partido'){ zona.innerHTML = ''; return; }
-  const hoy = eventosVista().map((e,i)=>({e,i})).filter(x => x.e.hoy);
+  const hoy = todosLosEventos().filter(e => e.hoy || e.vivo);
   if(!hoy.length){ zona.innerHTML = ''; return; }
   zona.innerHTML = `<div class="franja">
     <div class="fh-titulo">🔥 HOY EN LA PLATAFORMA <small>· ${hoy.length} ${hoy.length === 1 ? 'partido' : 'partidos'}</small></div>
-    ${hoy.map(x => `<div class="fh-item ${x.e.vivo ? 'vivo' : ''}">
-      <span class="fh-cuando">${x.e.vivo
+    ${hoy.map(e => `<div class="fh-item ${e.vivo ? 'vivo' : ''}">
+      <span class="fh-cuando">${e.vivo
         ? '<span class="live-badge"><span class="dot"></span>EN VIVO</span>'
-        : '<span class="hora">🕐 ' + x.e.hora + ' hs</span>'}</span>
-      <span class="fh-partido">${x.e.t1}<b>VS</b>${x.e.t2}</span>
-      <span class="fh-cat">${x.e.cat}</span>
-      ${x.e.vivo ? `<span class="fh-mirando">👥 ${x.e.mirando} mirando</span>` : ''}
-      <button class="btn ${x.e.vivo ? 'btn-o' : 'btn-g'} btn-sm" onclick="comprar(${x.i})">${x.e.vivo ? 'Comprar y mirar' : 'Comprar'}</button>
+        : '<span class="hora">🕐 ' + e.hora + ' hs</span>'}</span>
+      <span class="fh-partido">${e.t1}<b>VS</b>${e.t2}</span>
+      <span class="fh-cat">${e.cat}</span>
+      ${e.vivo ? `<span class="fh-mirando">👥 ${e.mirando || 23} mirando</span>` : ''}
+      <button class="btn ${e.vivo ? 'btn-o' : 'btn-g'} btn-sm" onclick="comprar('${e.id}')">${e.vivo ? 'Comprar y mirar' : 'Comprar'}</button>
     </div>`).join('')}
   </div>`;
 }
@@ -577,15 +564,15 @@ function proximoSabado(){
 }
 let objetivoCount = null;
 function renderHero(){
-  const es = eventosVista();
+  const es = todosLosEventos();
   const vivo = es.find(e => e.vivo);
   const hoyNoVivo = es.find(e => e.hoy && !e.vivo);
   const e = vivo || hoyNoVivo || es[0];
-  let badge, heroFecha, chipFecha;
+  let badge, heroFecha;
 
   if(vivo){
     badge = `<span class="badge live"><span class="dot"></span> EN VIVO AHORA</span>`;
-    heroFecha = 'Primera División · ⚽ El partido ya empezó · 👥 ' + e.mirando + ' personas lo están mirando';
+    heroFecha = e.cat + ' · ⚽ El partido ya empezó · 👥 ' + (e.mirando || 23) + ' personas lo están mirando';
     objetivoCount = null;
   } else if(hoyNoVivo){
     const p = hoyNoVivo.hora.split(':');
@@ -610,7 +597,7 @@ function renderHero(){
     <div class="count" id="count"></div>
     <div class="compra">
       <span class="precio-gde">$${e.precio.toLocaleString('es-AR')} <small>/ ${vivo ? 'entrás ahora' : 'acceso completo'}</small></span>
-      <button class="btn btn-o" onclick="comprar(${EVENTOS.indexOf(EVENTOS.find(x => x.t1 === e.t1 && x.t2 === e.t2))})">${vivo ? 'Comprar y mirar' : 'Comprar ticket'}</button>
+      <button class="btn btn-o" onclick="comprar('${e.id}')">${vivo ? 'Comprar y mirar' : 'Comprar ticket'}</button>
       <a class="btn btn-g" href="#como">¿Cómo veo?</a>
     </div>`;
 
@@ -635,14 +622,14 @@ setInterval(() => {
   if(c) c.innerHTML = `<div><b>${dd}</b><span>días</span></div><div><b>${hh}</b><span>hs</span></div><div><b>${mm}</b><span>min</span></div><div><b>${s}</b><span>seg</span></div>`;
 }, 1000);
 
-document.getElementById('grid-repeticiones').innerHTML = REPETICIONES.map((e,i) => tarjeta(e,i,true)).join('');
+document.getElementById('grid-repeticiones').innerHTML = REPETICIONES.map(e => tarjeta({...e, id:'rep'+Math.random()}, true)).join('');
 
 function cerrarNotif(){
   document.getElementById('notif').style.display = 'none';
   localStorage.setItem('fm-notif-off','1');
 }
 
-/* ===== SESIÓN: EMAIL + CLAVE ===== */
+/* ===== SESIÓN USUARIO ===== */
 function sesionClick(){
   const u = usuarioActual();
   if(u){ abrirMisEventos(); } else { paso('modal-ingresar',1); abrir('modal-ingresar'); }
@@ -653,26 +640,22 @@ function actualizarHeader(){
 }
 function registroCrear(){
   const nombre = document.getElementById('reg-nombre').value.trim();
-  const apellido = document.getElementById('reg-apellido').value.trim();
   const email = document.getElementById('reg-email').value.trim().toLowerCase();
   const c1 = document.getElementById('reg-clave').value;
   const c2 = document.getElementById('reg-clave2').value;
-  const tel = (document.getElementById('reg-tel').value || '').replace(/[\s\-\(\)]/g,'');
-
   if(!nombre){ toast('Contanos tu nombre'); return; }
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast('Ese email no parece válido. Revisalo'); return; }
   if(c1.length < 6){ toast('La clave necesita al menos 6 caracteres'); return; }
   if(c1 !== c2){ toast('Las dos claves no coinciden'); return; }
-  if(DB.usuarios.some(u => u.email === email)){ toast('Ya hay una cuenta con ese email. Usá "Ingresar"'); cerrar('modal-usuario'); paso('modal-ingresar',1); abrir('modal-ingresar'); document.getElementById('login-email').value = email; return; }
+  if(DB.usuarios.some(u => u.email === email)){ toast('Ya hay una cuenta con ese email. Usá "Ingresar"'); cerrar('modal-usuario'); abrir('modal-ingresar'); return; }
   if(!document.getElementById('chk1').checked){ toast('Necesitamos que aceptes los términos para continuar'); return; }
-
-  const gustos = [...document.querySelectorAll('#modal-usuario .chip.on')].map(c => c.dataset.g);
   const usuarios = DB.usuarios;
-  usuarios.push({ nombre, apellido, email, clave: c1, tel, gustos, creado: new Date().toISOString() });
+  usuarios.push({ nombre, apellido: document.getElementById('reg-apellido').value.trim(), email, clave: c1,
+    tel: (document.getElementById('reg-tel').value||'').replace(/[\s\-\(\)]/g,''), rol:'usuario', creado: new Date().toISOString() });
   DB.usuarios = usuarios;
   DB.sesion = email;
   actualizarHeader();
-  document.getElementById('reg-ok-txt').innerHTML = '¡Cuenta creada, ' + nombre + '!<br>Guardá tu clave: la usás para entrar.';
+  document.getElementById('reg-ok-txt').innerHTML = '¡Cuenta creada, ' + nombre + '!';
   paso('modal-usuario',2);
   toast('Cuenta creada y guardada ✔');
 }
@@ -702,10 +685,36 @@ function cerrarSesion(){
   DB.sesion = null; actualizarHeader(); cerrar('modal-miseventos');
   toast('Cerraste sesión. ¡Hasta la próxima!');
 }
-function comprar(i, esRep){
-  if(!usuarioActual()){ toast('Primero creá tu cuenta o iniciá sesión (tarda 1 minuto)'); paso('modal-ingresar',1); abrir('modal-ingresar'); return; }
-  const e = esRep ? REPETICIONES[i] : eventosVista()[i];
-  comprarCtx = {titulo: e.t1 + ' vs ' + e.t2, precio: e.precio, fecha: esRep ? e.fecha : fechaTxt(e), esRep, vivo: !!e.vivo};
+
+/* ===== REGISTRO PRODUCTORA (queda PENDIENTE; la aprueba el admin) ===== */
+function registroProductora(){
+  const nombre = document.getElementById('prod-nombre').value.trim();
+  const email = document.getElementById('prod-email').value.trim().toLowerCase();
+  const c1 = document.getElementById('prod-clave').value;
+  if(!nombre){ toast('Poné el nombre comercial de la productora'); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast('Ese email no parece válido'); return; }
+  if(c1.length < 6){ toast('La clave necesita al menos 6 caracteres'); return; }
+  if(DB.prod.some(p => p.email === email)){ toast('Ya hay una solicitud con ese email'); return; }
+  const prods = DB.prod;
+  prods.push({ nombre, cuit: document.getElementById('prod-cuit').value.trim(),
+    resp: document.getElementById('prod-resp').value.trim(), email, clave: c1,
+    tel: (document.getElementById('prod-tel').value||'').replace(/[\s\-\(\)]/g,''),
+    contenidos: document.getElementById('prod-cont').value.trim(),
+    estado:'pendiente', creado: new Date().toISOString() });
+  DB.prod = prods;
+  document.getElementById('prod-ok-txt').innerHTML = '¡Solicitud enviada, ' + nombre + '!<br>Quedó <b>pendiente de aprobación</b>.<br>Cuando el administrador la habilite, entrás desde "Panel de productoras".';
+  paso('modal-productora',2);
+  toast('Solicitud enviada ✔');
+}
+
+/* ===== COMPRA (busca por id en todas las listas) ===== */
+function comprar(id, esRep){
+  if(!usuarioActual()){ toast('Primero creá tu cuenta o iniciá sesión (tarda 1 minuto)'); abrir('modal-ingresar'); return; }
+  let e;
+  if(esRep){ e = REPETICIONES[0]; }
+  else { e = todosLosEventos().find(x => x.id === id); }
+  if(!e) return;
+  comprarCtx = {titulo: e.t1 + ' vs ' + e.t2, precio: e.precio, fecha: esRep ? e.fecha : fechaTxt(e), esRep, vivo: !!e.vivo, eventoId: id};
   document.getElementById('compra-titulo').textContent = e.t1 + ' vs ' + e.t2;
   document.getElementById('compra-sub').textContent = (e.vivo ? '🔴 EN VIVO AHORA · ' : (esRep ? 'Repetición · ' : '')) + e.cat + ' · ' + (esRep ? e.fecha : fechaTxt(e)) + ' · ' + e.lugar;
   document.getElementById('compra-precio').textContent = '$' + e.precio.toLocaleString('es-AR');
@@ -721,7 +730,7 @@ function confirmarCompra(){
   t[u.email].push({ titulo: comprarCtx.titulo, precio: comprarCtx.precio, fecha: comprarCtx.fecha,
     estado: comprarCtx.esRep ? 'REPETICIÓN' : (comprarCtx.vivo ? 'EN VIVO' : 'PRÓXIMO'),
     clase: comprarCtx.esRep ? 'rep' : (comprarCtx.vivo ? 'vivo' : 'prox'),
-    comprado: new Date().toISOString() });
+    eventoId: comprarCtx.eventoId, comprado: new Date().toISOString() });
   DB.tickets = t;
   document.getElementById('compra-ok-txt').innerHTML = '¡Compra registrada!<br>El ticket ya está en "Mis eventos".';
   paso('modal-comprar',2);

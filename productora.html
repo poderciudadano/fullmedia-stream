@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productoras — FULLMedia Stream</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0c;--card:#17171a;--border:#2a2a2e;--orange:#f5834d;--text:#f4f4f5;--muted:#a1a1aa;--live:#e5484d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding:20px}
+header{border-bottom:1px solid var(--border);background:#121214}
+.hbar{max-width:900px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo b{font-family:'Baloo 2';font-size:20px}.logo .med{color:var(--orange)}
+.btn{padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:14px}
+.btn-o{background:linear-gradient(135deg,var(--orange),#f2703a);color:#fff}
+.btn-g{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-rojo{background:transparent;border:1px solid rgba(229,72,77,.5);color:#ff6b70}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:1px;padding:3px 9px;border-radius:999px}
+.tag.pend{background:rgba(245,131,77,.15);color:var(--orange)}
+.tag.act{background:rgba(48,164,108,.18);color:#4cc38a}
+.tag.vivo{background:rgba(229,72,77,.18);color:#ff6b70}
+h2{font-family:'Baloo 2';font-size:22px;margin:10px 0 14px}
+.sub{color:var(--muted);font-size:13.5px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}
+input,select{width:100%;background:#0e0e10;border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.dos{grid-template-columns:1fr}}
+.centrado{max-width:380px;margin:12vh auto;text-align:center}
+.centrado h1{font-family:'Baloo 2';margin-bottom:6px}
+input[type=color]{padding:4px;height:48px;cursor:pointer}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.kpi div{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.kpi b{font-family:'Baloo 2';font-size:26px;color:var(--orange);display:block}
+.kpi span{font-size:12px;color:var(--muted)}
+.rtmp{background:rgba(245,131,77,.08);border:1px dashed rgba(245,131,77,.5);border-radius:10px;padding:12px;font-size:13px;margin-top:10px}
+.rtmp code{color:var(--orange);font-weight:700}
+#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#1f1f23;border:1px solid var(--border);border-radius:12px;padding:12px 20px;opacity:0;transition:.3s;pointer-events:none}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="hbar">
+    <a class="logo" href="index.html" style="text-decoration:none;color:var(--text)"><b>FULL<span class="med">media</span> STREAM</b> <span class="sub">· panel de productoras</span></a>
+    <button class="btn btn-g" id="btn-salir" style="display:none" onclick="salir()">Salir</button>
+  </div>
+</header>
+
+<!-- LOGIN PRODUCTORA -->
+<div class="centrado" id="login">
+  <h1>Panel de productoras</h1>
+  <p class="sub" style="margin-bottom:18px">Entrá con el email y clave con los que te registraste.<br>
+  ¿Todavía no te registraste? <a href="index.html#productoras" style="color:var(--orange)">Hacelo desde la home</a>.</p>
+  <label>Email</label><input type="email" id="p-email">
+  <label>Clave</label><input type="password" id="p-clave">
+  <button class="btn btn-o" style="width:100%;margin-top:16px" onclick="loginProd()">Ingresar</button>
+</div>
+
+<div class="wrap" id="pendiente" style="display:none">
+  <div class="card" style="text-align:center;padding:44px">
+    <div style="font-size:44px">🐝</div>
+    <h2 style="margin:10px 0">Tu cuenta está pendiente de aprobación</h2>
+    <p class="sub">El administrador revisa las solicitudes y te habilita por WhatsApp.<br>Cuando te aprueben, vas a poder entrar acá y crear tus eventos.</p>
+    <button class="btn btn-g" style="margin-top:16px" onclick="salir()">Volver</button>
+  </div>
+</div>
+
+<div class="wrap" id="panel" style="display:none">
+  <h2 id="hola">Mi panel</h2>
+  <div class="kpi">
+    <div><b id="k-ev">0</b><span>mis eventos</span></div>
+    <div><b id="k-ventas">0</b><span>tickets vendidos</span></div>
+    <div><b id="k-recau">$0</b><span>recaudado (bruto)</span></div>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">🔑 Mi clave de transmisión</h2>
+    <div class="rtmp" id="rtmp-box"></div>
+    <p class="sub" style="margin-top:8px">Pegala en Fullmedia, OBS o vMix (Servicio: Personalizado). No la compartas: cualquiera que la tenga puede transmitir en tu nombre.</p>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">➕ Crear evento</h2>
+    <label>Club / equipo A</label><input type="text" id="e-t1" placeholder="Ej: Club Belgrano">
+    <label>Club / equipo B</label><input type="text" id="e-t2" placeholder="Ej: Sp. Independencia">
+    <div class="dos">
+      <div><label>Categoría</label><input type="text" id="e-cat" placeholder="Ej: Primera, Sub-17, Damas"></div>
+      <div><label>Deporte</label><select id="e-dep"><option value="futbol">Fútbol</option><option value="basquet">Básquet</option><option value="hockey">Hockey</option></select></div>
+    </div>
+    <div class="dos">
+      <div><label>Día</label><input type="text" id="e-dia" placeholder="Ej: Sáb"></div>
+      <div><label>Hora</label><input type="text" id="e-hora" placeholder="Ej: 21:00"></div>
+    </div>
+    <label>Torneo / competencia</label><input type="text" id="e-torneo" placeholder="Ej: LIGA INTERPROVINCIAL DE FÚTBOL">
+    <label>Lugar</label><input type="text" id="e-lugar" placeholder="Ej: Estadio Municipal">
+    <div class="dos">
+      <div><label>Precio del ticket ($)</label><input type="number" id="e-precio" value="4000" min="0"></div>
+      <div><label>Fecha larga (opcional)</label><input type="text" id="e-fechalarga" placeholder="Ej: Sábado 14 de septiembre"></div>
+    </div>
+    <div class="dos">
+      <div><label>Color club A</label><input type="color" id="e-colA" value="#1e40af"></div>
+      <div><label>Color club B</label><input type="color" id="e-colB" value="#c8102e"></div>
+    </div>
+    <button class="btn btn-o" style="width:100%;margin-top:16px" onclick="crearEvento()">Crear evento (el flyer se genera solo)</button>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">📺 Mis eventos</h2>
+    <div id="mis-eventos"></div>
+    <p class="sub">⚡ El botón "Iniciar transmisión" es <b>solo de la demo</b>: en producción el estado EN VIVO se dispara solo cuando tu señal RTMP entra al servidor. Lo dejamos para que veas cómo reacciona la home.</p>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const DB = {
+  get prod(){ return JSON.parse(localStorage.getItem('fm_prod') || '[]'); },
+  set prod(v){ localStorage.setItem('fm_prod', JSON.stringify(v)); },
+  get eventos(){ return JSON.parse(localStorage.getItem('fm_eventos') || '[]'); },
+  set eventos(v){ localStorage.setItem('fm_eventos', JSON.stringify(v)); },
+  get tickets(){ return JSON.parse(localStorage.getItem('fm_tickets') || '{}'); }
+};
+let sesionProd = null;
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3200); }
+function iniciales(t){ return t.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase(); }
+
+function loginProd(){
+  const email = document.getElementById('p-email').value.trim().toLowerCase();
+  const clave = document.getElementById('p-clave').value;
+  const p = DB.prod.find(x => x.email === email);
+  if(!p){ toast('No encontramos una productora con ese email. Registraté desde la home'); return; }
+  if(p.clave !== clave){ toast('La clave no coincide'); return; }
+  if(p.estado === 'pendiente'){ sessionStorage.setItem('fm_prod_pend', email); mostrarPendiente(); return; }
+  if(p.estado === 'rechazada'){ toast('Tu solicitud fue rechazada. Contactá al administrador'); return; }
+  sessionStorage.setItem('fm_prod_ses', email);
+  sesionProd = p;
+  mostrarPanel();
+}
+function salir(){ sessionStorage.removeItem('fm_prod_ses'); sessionStorage.removeItem('fm_prod_pend'); location.reload(); }
+function mostrarPendiente(){
+  document.getElementById('login').style.display='none';
+  document.getElementById('pendiente').style.display='block';
+  document.getElementById('btn-salir').style.display='inline-block';
+}
+function mostrarPanel(){
+  document.getElementById('login').style.display='none';
+  document.getElementById('panel').style.display='block';
+  document.getElementById('btn-salir').style.display='inline-block';
+  document.getElementById('hola').textContent = 'Hola, ' + sesionProd.nombre;
+  document.getElementById('rtmp-box').innerHTML =
+    'Servidor (RTMP): <code>rtmp://ingest.fullmedia.com.ar/live</code><br>Clave de transmisión: <code>' + (sesionProd.rtmpKey||'—') + '</code>';
+  render();
+}
+function misEventos(){ return DB.eventos.filter(e => e.prodEmail === sesionProd.email); }
+function render(){
+  const mios = misEventos();
+  const tk = DB.tickets;
+  let ventas = 0, recau = 0;
+  mios.forEach(e => { Object.values(tk).forEach(lista => lista.forEach(t => { if(t.eventoId === e.id){ ventas++; recau += t.precio; } })); });
+  document.getElementById('k-ev').textContent = mios.length;
+  document.getElementById('k-ventas').textContent = ventas;
+  document.getElementById('k-recau').textContent = '$' + recau.toLocaleString('es-AR');
+  document.getElementById('mis-eventos').innerHTML = !mios.length
+    ? '<p class="sub">Todavía no creaste eventos. Usá el formulario de arriba.</p>'
+    : mios.map(e => `<div class="item">
+        <div><b>${e.t1} vs ${e.t2}</b><small>${e.torneo} · ${e.cat} · ${e.fechaTxt||e.dia+' '+e.hora} · $${e.precio.toLocaleString('es-AR')}</small></div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="tag ${e.vivo?'vivo':'act'}">${e.vivo?'EN VIVO':'PROGRAMADO'}</span>
+          <button class="btn ${e.vivo?'btn-rojo':'btn-o'}" onclick="toggleVivo('${e.id}')">${e.vivo?'Detener':'Iniciar transmisión'}</button>
+        </div>
+      </div>`).join('');
+}
+function toggleVivo(id){
+  const evs = DB.eventos;
+  const e = evs.find(x => x.id === id);
+  e.vivo = !e.vivo;
+  if(e.vivo) e.mirando = Math.floor(10 + Math.random()*150);
+  DB.eventos = evs;
+  toast(e.vivo ? '🔴 Transmitiendo — mirá la home, aparece EN VIVO' : 'Transmisión detenida');
+  render();
+}
+function crearEvento(){
+  const t1 = document.getElementById('e-t1').value.trim();
+  const t2 = document.getElementById('e-t2').value.trim();
+  const cat = document.getElementById('e-cat').value.trim() || 'General';
+  const torneo = document.getElementById('e-torneo').value.trim() || 'COMPETENCIA LOCAL';
+  const lugar = document.getElementById('e-lugar').value.trim() || 'A confirmar';
+  const precio = parseInt(document.getElementById('e-precio').value) || 0;
+  if(!t1 || !t2){ toast('Poné los dos equipos'); return; }
+  const evs = DB.eventos;
+  evs.push({
+    id: 'ev_' + Date.now(),
+    t1, t2, cat, torneo,
+    deporte: document.getElementById('e-dep').value,
+    dia: document.getElementById('e-dia').value.trim() || 'Próximamente',
+    hora: document.getElementById('e-hora').value.trim() || '',
+    fechaTxt: document.getElementById('e-fechalarga').value.trim(),
+    lugar, precio,
+    colA: document.getElementById('e-colA').value,
+    colB: document.getElementById('e-colB').value,
+    e1: iniciales(t1), e2: iniciales(t2),
+    prod: sesionProd.nombre, prodEmail: sesionProd.email,
+    vivo: false, creado: new Date().toISOString()
+  });
+  DB.eventos = evs;
+  ['e-t1','e-t2','e-cat','e-torneo','e-lugar','e-fechalarga','e-dia','e-hora'].forEach(id => document.getElementById(id).value = '');
+  toast('Evento creado ✔ Ya aparece en la home');
+  render();
+}
+const pend = sessionStorage.getItem('fm_prod_pend');
+const ses = sessionStorage.getItem('fm_prod_ses');
+if(ses){ sesionProd = DB.prod.find(p => p.email === ses); if(sesionProd) mostrarPanel(); }
+else if(pend){ mostrarPendiente(); }
+</script>
+</body>
+</html>
