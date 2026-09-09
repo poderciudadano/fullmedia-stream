@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0c">
+<title>FULLMedia Stream — El deporte de tu zona, en vivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0c; --bg2:#121214; --card:#17171a; --border:#2a2a2e;
+  --orange:#f5834d; --orange2:#fba07c; --text:#f4f4f5; --muted:#a1a1aa; --live:#e5484d;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+body{background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; line-height:1.5}
+h1,h2,h3,.baloo{font-family:'Baloo 2',system-ui,sans-serif}
+.container{max-width:1150px; margin:0 auto; padding:0 20px}
+
+/* HEADER */
+header{position:sticky; top:0; z-index:50; background:rgba(11,11,12,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--border)}
+.hbar{display:flex; align-items:center; justify-content:space-between; height:68px}
+.logo{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
+.logo b{font-family:'Baloo 2'; font-size:22px; font-weight:800}
+.logo .med{color:var(--orange)}
+.logo .strm{font-size:11px; letter-spacing:3px; color:var(--muted); text-transform:uppercase; margin-left:2px}
+nav{display:flex; align-items:center; gap:26px}
+nav a{color:var(--muted); text-decoration:none; font-size:15px; font-weight:500}
+nav a:hover{color:#fff}
+@media(max-width:760px){ nav a{display:none} }
+
+/* BOTONES */
+.btn{display:inline-block; padding:13px 26px; border-radius:12px; border:none; cursor:pointer; font-size:16px; font-weight:700; text-decoration:none; text-align:center; transition:.2s}
+.btn-o{background:linear-gradient(135deg,var(--orange),#f2703a); color:#fff; box-shadow:0 6px 20px rgba(245,131,77,.25)}
+.btn-o:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(245,131,77,.35)}
+.btn-g{background:transparent; color:var(--text); border:1px solid var(--border)}
+.btn-g:hover{border-color:var(--orange); color:var(--orange)}
+.btn-sm{padding:9px 16px; font-size:14px; border-radius:10px}
+
+/* HERO */
+.hero{display:grid; grid-template-columns:1.15fr 1fr; gap:44px; padding:56px 0 50px; align-items:center}
+@media(max-width:860px){ .hero{grid-template-columns:1fr; padding:36px 0} }
+.badge{display:inline-flex; align-items:center; gap:8px; background:rgba(245,131,77,.12); color:var(--orange); border:1px solid rgba(245,131,77,.4); padding:6px 14px; border-radius:999px; font-size:13px; font-weight:600; letter-spacing:.5px}
+.badge.live{background:rgba(229,72,77,.15); color:#ff6b70; border-color:rgba(229,72,77,.5)}
+.dot{width:8px; height:8px; border-radius:50%; background:currentColor; animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:clamp(30px,4.6vw,48px); line-height:1.1; margin:16px 0 10px; font-weight:800}
+.hero h1 .vs{color:var(--orange)}
+.meta{color:var(--muted); font-size:15px; margin-bottom:20px}
+.count{display:flex; gap:10px; margin:18px 0 22px}
+.count div{background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:10px 0; min-width:66px; text-align:center}
+.count b{display:block; font-family:'Baloo 2'; font-size:26px; color:var(--orange)}
+.count span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px}
+.compra{display:flex; align-items:center; gap:18px; flex-wrap:wrap}
+.precio-gde{font-family:'Baloo 2'; font-size:30px; color:var(--orange)}
+.precio-gde small{font-size:14px; color:var(--muted); font-family:inherit}
+.hero-media{aspect-ratio:16/10; border-radius:18px; border:1px solid var(--border); position:relative; overflow:hidden;
+  background:radial-gradient(circle at 30% 20%, rgba(245,131,77,.18), transparent 55%),
+  radial-gradient(circle at 80% 80%, rgba(245,131,77,.1), transparent 50%), var(--bg2);
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px}
+.hero-media .hvivo{position:absolute; top:14px; left:14px; background:var(--live); color:#fff; font-size:12px; font-weight:800; letter-spacing:1px; padding:6px 12px; border-radius:999px; display:flex; align-items:center; gap:7px}
+.play{width:74px; height:74px; border-radius:50%; background:rgba(245,131,77,.15); border:2px solid var(--orange); display:flex; align-items:center; justify-content:center}
+.play::after{content:''; border-left:22px solid var(--orange); border-top:13px solid transparent; border-bottom:13px solid transparent; margin-left:6px}
+.hero-media span{color:var(--muted); font-size:13px; letter-spacing:2px; text-transform:uppercase}
+
+/* SECCIONES */
+section{padding:52px 0}
+.sec-head{display:flex; justify-content:space-between; align-items:end; margin-bottom:22px}
+.sec-head h2{font-size:30px; font-weight:800}
+.sec-head p{color:var(--muted); font-size:14px}
+
+/* FILTROS */
+.chips{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px}
+.chip{padding:9px 20px; border-radius:999px; border:1px solid var(--border); background:var(--card); color:var(--muted); cursor:pointer; font-size:14.5px; font-weight:600; transition:.15s}
+.chip:hover{border-color:var(--orange)}
+.chip.on{background:linear-gradient(135deg,var(--orange),#f2703a); border-color:transparent; color:#fff}
+
+/* TITULO EN VIVO */
+.live-title{display:flex; align-items:center; gap:10px; font-family:'Baloo 2'; font-size:22px; color:#ff6b70; margin-bottom:16px}
+.live-title .dot{width:10px; height:10px; background:var(--live)}
+.live-title small{color:var(--muted); font-family:inherit; font-weight:400; font-size:13.5px}
+
+/* TARJETAS CON FLYER */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(265px,1fr)); gap:18px}
+.card{background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:.2s; display:flex; flex-direction:column}
+.card:hover{transform:translateY(-3px); border-color:rgba(245,131,77,.55); box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.card.ahora{border-color:rgba(229,72,77,.6)}
+.flyer{aspect-ratio:16/9; position:relative; display:flex; flex-direction:column; justify-content:space-between; padding:14px}
+.flyer::before{content:''; position:absolute; inset:0; background:repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 16px)}
+.flyer::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.15), transparent 40%, rgba(0,0,0,.45))}
+.flyer>*{position:relative; z-index:1}
+.flyer-top{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.comp{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.9); background:rgba(0,0,0,.35); padding:4px 10px; border-radius:999px; backdrop-filter:blur(4px); font-weight:600}
+.live-badge{background:var(--live); color:#fff; font-size:11px; font-weight:800; letter-spacing:1.5px; padding:5px 11px; border-radius:999px; display:inline-flex; align-items:center; gap:6px}
+.rep-badge{background:rgba(255,255,255,.2); color:#fff; font-size:11px; font-weight:800; letter-spacing:1.5px; padding:5px 11px; border-radius:999px; backdrop-filter:blur(4px)}
+.marca{margin-left:auto; font-size:9.5px; letter-spacing:2px; color:rgba(255,255,255,.55); font-weight:600}
+.flyer-mid{display:flex; align-items:center; justify-content:center; gap:14px}
+.escudo{width:50px; height:50px; border-radius:50%; background:rgba(0,0,0,.28); border:2px solid rgba(255,255,255,.55); display:flex; align-items:center; justify-content:center; font-family:'Baloo 2'; font-weight:800; font-size:17px; color:#fff; flex:none}
+.names{text-align:center; line-height:1.25}
+.names b{display:block; font-family:'Baloo 2'; font-size:17px; text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.names span{font-size:10px; letter-spacing:3px; color:rgba(255,255,255,.75); font-weight:700}
+.flyer-foot{display:flex; justify-content:space-between; align-items:center; font-size:12px; color:rgba(255,255,255,.85); background:rgba(0,0,0,.35); margin:-2px -2px 0; padding:8px 10px; border-radius:10px; backdrop-filter:blur(4px)}
+.card-foot{display:flex; justify-content:space-between; align-items:center; padding:13px 16px 15px; gap:10px}
+.precio{font-family:'Baloo 2'; font-size:21px; color:var(--orange)}
+.mirando{font-size:12.5px; color:var(--muted); margin:0 16px; margin-top:-4px}
+
+/* CÓMO VER / ABONOS / PRODUCTORAS */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+@media(max-width:760px){ .steps{grid-template-columns:1fr} }
+.step{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px}
+.step .n{font-family:'Baloo 2'; font-size:44px; font-weight:800; color:var(--orange)}
+.step h3{font-size:19px; margin:6px 0}
+.step p{color:var(--muted); font-size:14.5px}
+.abono{background:linear-gradient(180deg, rgba(245,131,77,.09), transparent); border:1px solid rgba(245,131,77,.35); border-radius:20px; padding:34px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap}
+.abono h3{font-size:24px}
+.abono p{color:var(--muted); max-width:560px}
+.cta{background:linear-gradient(135deg, rgba(245,131,77,.14), rgba(245,131,77,.03)); border:1px solid rgba(245,131,77,.4); border-radius:20px; padding:44px; display:flex; justify-content:space-between; align-items:center; gap:30px; flex-wrap:wrap}
+.cta ul{list-style:none; margin-top:14px}
+.cta li{color:var(--muted); padding:4px 0; font-size:15px}
+.cta li::before{content:'✔ '; color:var(--orange)}
+.cta h2{font-size:30px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border); padding:42px 0 90px; color:var(--muted); font-size:14px}
+.fgrid{display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap}
+footer a{color:var(--muted); text-decoration:none; display:block; padding:3px 0}
+footer a:hover{color:var(--orange)}
+.copy{margin-top:30px; font-size:12.5px; color:#55555c}
+
+/* WHATSAPP */
+.wa{position:fixed; bottom:22px; right:22px; width:58px; height:58px; border-radius:50%; background:#25d366; display:flex; align-items:center; justify-content:center; z-index:80; box-shadow:0 6px 20px rgba(0,0,0,.4); text-decoration:none}
+.wa svg{width:30px; height:30px; fill:#fff}
+
+/* MODALES */
+.modal{position:fixed; inset:0; background:rgba(0,0,0,.72); display:none; align-items:center; justify-content:center; padding:18px; z-index:100}
+.modal.open{display:flex}
+.mbox{background:#141416; border:1px solid var(--border); border-radius:18px; width:100%; max-width:440px; padding:28px; position:relative; max-height:92vh; overflow-y:auto}
+.mbox h3{font-size:23px; margin-bottom:4px}
+.mbox .sub{color:var(--muted); font-size:14px; margin-bottom:18px}
+.mclose{position:absolute; top:14px; right:16px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer}
+label{display:block; font-size:13px; color:var(--muted); margin:10px 0 5px}
+input,textarea{width:100%; background:#0e0e10; border:1px solid var(--border); border-radius:10px; padding:12px 14px; color:var(--text); font-size:15px; margin-bottom:4px}
+input:focus,textarea:focus{outline:none; border-color:var(--orange)}
+.chk{display:flex; gap:9px; align-items:flex-start; font-size:13.5px; color:var(--muted); margin:14px 0}
+.chk input{width:auto; margin-top:3px}
+.chk a{color:var(--orange)}
+.mstep{display:none}
+.mstep.on{display:block}
+.ok-ico{text-align:center; font-size:44px; margin:10px 0}
+.ok-txt{text-align:center; color:var(--muted); margin-bottom:18px}
+.btn-full{width:100%; margin-top:14px}
+.switch{font-size:13.5px; color:var(--muted); text-align:center; margin-top:14px}
+.switch a{color:var(--orange); cursor:pointer}
+.demo-tag{display:inline-block; background:#26262b; color:#9a9aa2; font-size:11px; padding:3px 10px; border-radius:999px; margin-bottom:12px}
+.politica td, .politica th{border:1px solid var(--border); padding:8px 10px; font-size:13.5px; text-align:left}
+.politica{border-collapse:collapse; width:100%; margin:10px 0}
+.mbox.txto{max-width:620px}
+#toast{position:fixed; bottom:96px; left:50%; transform:translateX(-50%) translateY(10px); background:#1f1f23; border:1px solid var(--border); border-radius:12px; padding:12px 20px; font-size:14.5px; opacity:0; pointer-events:none; transition:.3s; z-index:120; max-width:90vw}
+#toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container hbar">
+    <a class="logo" href="#">
+      <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
+        <path d="M6 24 C0 16 14 8 25 15 C18 21 12 24 6 24Z" fill="none" stroke="#8a8a93" stroke-width="2.4"/>
+        <path d="M12 33 C4 29 9 19 20 21 C18 26 16 30 12 33Z" fill="none" stroke="#5c5c64" stroke-width="2.4"/>
+        <ellipse cx="37" cy="40" rx="16" ry="11" transform="rotate(-28 37 40)" fill="#232327"/>
+        <path d="M26 48 q7 4 13 1 M30 33 q7 4 13 1" stroke="#0b0b0c" stroke-width="3" fill="none"/>
+        <circle cx="52" cy="25" r="5.5" fill="#232327"/>
+        <circle cx="53.5" cy="24" r="2" fill="#f5834d"/>
+        <path d="M55 20 q3 -5 8 -5" stroke="#8a8a93" stroke-width="1.6" fill="none"/>
+      </svg>
+      <span><b>FULL<span class="med">media</span></b><span class="strm">stream</span></span>
+    </a>
+    <nav>
+      <a href="#eventos">Eventos</a>
+      <a href="#repeticiones">Repeticiones</a>
+      <a href="#abonos">Abonos</a>
+      <button class="btn btn-o btn-sm" id="btn-sesion" onclick="abrirIngresar()">Ingresar</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO (dinámico: muestra EN VIVO si hay, o próximo evento con cuenta regresiva) -->
+<div class="container hero">
+  <div id="hero"></div>
+  <div class="hero-media" id="hero-media">
+    <div class="play"></div>
+    <span>Señal de FULLMedia Stream</span>
+  </div>
+</div>
+
+<!-- EVENTOS -->
+<section id="eventos">
+  <div class="container">
+    <div class="sec-head">
+      <h2>Eventos</h2>
+      <p>Acceso a un solo dispositivo · Entrás en menos de 1 minuto</p>
+    </div>
+    <div class="chips" id="chips">
+      <button class="chip" data-f="todos">Todos los deportes</button>
+      <button class="chip" data-f="futbol">⚽ Fútbol</button>
+      <button class="chip" data-f="basquet">🏀 Básquet</button>
+      <button class="chip" data-f="hockey">🏑 Hockey</button>
+    </div>
+    <div id="zona-vivos"></div>
+    <div class="grid" id="grid-eventos"></div>
+  </div>
+</section>
+
+<!-- CÓMO VER -->
+<section id="como" style="background:var(--bg2)">
+  <div class="container">
+    <div class="sec-head"><h2>Ver es muy simple</h2></div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Comprás tu acceso</h3><p>Pagás con Mercado Pago en dos clics, desde el celular o la computadora. Recibís la confirmación al instante.</p></div>
+      <div class="step"><div class="n">2</div><h3>Te avisamos por WhatsApp</h3><p>Te llega el enlace para entrar. Sin contraseñas complicadas: tu cuenta se valida con un código que te enviamos.</p></div>
+      <div class="step"><div class="n">3</div><h3>Entrás y mirás</h3><p>Desde el celular, la tablet, la computadora o la TV. Si el partido ya empezó, comprás y entrás igual.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABONOS -->
+<section id="abonos">
+  <div class="container">
+    <div class="abono">
+      <div>
+        <h3>Pronto: abono de club 🐝</h3>
+        <p>Mirá todos los partidos de tu club pagando un abono mensual, más barato que comprar entrada por entrada. Tu club también gana con cada abonado.</p>
+      </div>
+      <button class="btn btn-g" onclick="toast('El abono estará disponible pronto. Escribinos al WhatsApp y te avisamos.')">Avisame cuando salga</button>
+    </div>
+  </div>
+</section>
+
+<!-- REPETICIONES -->
+<section id="repeticiones" style="background:var(--bg2)">
+  <div class="container">
+    <div class="sec-head">
+      <h2>Repeticiones disponibles</h2>
+      <p>Disponibles por tiempo limitado · Las habilita cada productora</p>
+    </div>
+    <div class="grid" id="grid-repeticiones"></div>
+  </div>
+</section>
+
+<!-- PRODUCTORAS -->
+<section id="productoras">
+  <div class="container">
+    <div class="cta">
+      <div style="max-width:600px">
+        <h2>¿Producís contenido?</h2>
+        <ul>
+          <li>Tu clave de transmisión propia (RTMP), lista para OBS, vMix o Fullmedia</li>
+          <li>Flyers de evento generados automáticamente, con tu marca y los colores de los clubes</li>
+          <li>Venta de entradas con Mercado Pago y liquidación detallada</li>
+          <li>Soporte cercano, de gente que transmite hace años</li>
+        </ul>
+      </div>
+      <button class="btn btn-o" onclick="abrir('modal-productora')">Quiero transmitir</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container fgrid">
+    <div>
+      <a class="logo" href="#" style="margin-bottom:10px"><b>FULL<span class="med">media</span></b><span class="strm">stream</span></a>
+      <p style="max-width:280px">El deporte de tu zona, en vivo y en directo. Producción local, transmisión profesional.</p>
+    </div>
+    <div>
+      <b style="color:var(--text)">Ayuda</b>
+      <a href="#" onclick="toast('Escribinos al WhatsApp de ayuda'); return false">WhatsApp de ayuda</a>
+      <a href="#" onclick="abrir('modal-tyc'); return false">Términos y condiciones</a>
+      <a href="#" onclick="abrir('modal-tyc'); return false">Política de reembolsos</a>
+    </div>
+    <div>
+      <b style="color:var(--text)">Plataforma</b>
+      <a href="#eventos">Eventos</a>
+      <a href="#repeticiones">Repeticiones</a>
+      <a href="#" onclick="abrir('modal-productora'); return false">Para productoras</a>
+    </div>
+  </div>
+  <div class="container copy">© 2025 FULLMedia Stream · fullmedia.com.ar · Todos los derechos de transmisión pertenecen a sus respectivos clubes y productoras autorizadas.</div>
+</footer>
+
+<a class="wa" href="#" onclick="toast('Demo: acá iría tu WhatsApp de soporte'); return false" aria-label="Ayuda por WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.1.6 4.1 1.6 5.9L4 29l8.4-1.6c1.7.9 3.6 1.4 5.6 1.4 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm5.9 16.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2.1-.1-.5-.2-1.1-.4-1.9-.7-3.3-1.4-5.5-4.8-5.7-5-.2-.2-1.4-1.8-1.4-3.5s.9-2.5 1.2-2.8c.3-.3.7-.4 1-.4h.7c.2 0 .5-.1.8.6.3.8 1 2.6 1.1 2.8.1.2.2.4 0 .7-.1.3-.2.4-.4.7l-.6.7c-.2.2-.4.4-.2.8.2.4 1 1.7 2.2 2.7 1.5 1.4 2.8 1.8 3.2 2 .4.2.6.2.9-.1.2-.3 1-1.2 1.3-1.6.3-.4.5-.3.9-.2.4.1 2.4 1.1 2.8 1.3.4.2.7.3.8.5.1.2.1 1-.2 1.8z"/></svg>
+</a>
+
+<!-- MODAL: INGRESAR -->
+<div class="modal" id="modal-ingresar">
+  <div class="mbox">
+    <button class="mclose" onclick="cerrar('modal-ingresar')">✕</button>
+    <span class="demo-tag">DEMO</span>
+    <h3>Ingresar</h3>
+    <p class="sub">Usamos tu WhatsApp para validarte. Sin contraseñas.</p>
+    <div class="mstep on" data-step="1">
+      <label>Tu número de WhatsApp</label>
+      <input type="tel" placeholder="Ej: 11 2345 6789">
+      <button class="btn btn-o btn-full" onclick="paso('modal-ingresar',2)">Recibir código</button>
+      <p class="switch">¿No tenés cuenta? <a onclick="cerrar('modal-ingresar'); abrir('modal-usuario')">Creála acá</a></p>
+    </div>
+    <div class="mstep" data-step="2">
+      <p class="sub" style="margin-bottom:8px">Te enviamos un código por WhatsApp.</p>
+      <label>Código de 6 dígitos</label>
+      <input type="text" maxlength="6" placeholder="- - - - - -" style="letter-spacing:8px; text-align:center; font-size:20px">
+      <button class="btn btn-o btn-full" onclick="loginOk()">Validar e ingresar</button>
+    </div>
+    <div class="mstep" data-step="3">
+      <div class="ok-ico">✅</div>
+      <p class="ok-txt">¡Listo! Iniciaste sesión.<br>(En la versión real, acá aparece tu sección "Mis eventos".)</p>
+      <button class="btn btn-o btn-full" onclick="cerrar('modal-ingresar')">Empezar a mirar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: REGISTRO USUARIO -->
+<div class="modal" id="modal-usuario">
+  <div class="mbox">
+    <button class="mclose" onclick="cerrar('modal-usuario')">✕</button>
+    <span class="demo-tag">DEMO</span>
+    <h3>Crear cuenta</h3>
+    <p class="sub">Tus datos quedan en la plataforma para enviarte los accesos.</p>
+    <div class="mstep on" data-step="1">
+      <label>Nombre</label><input type="text" placeholder="Tu nombre" id="reg-nombre">
+      <label>Apellido</label><input type="text" placeholder="Tu apellido">
+      <label>WhatsApp</label><input type="tel" placeholder="Ej: 11 2345 6789">
+      <label>Email (opcional)</label><input type="email" placeholder="tunombre@mail.com">
+      <label>¿Qué te gusta mirar? (podés elegir varios después)</label>
+      <div class="chips" style="margin:6px 0 0">
+        <button class="chip" onclick="toast('En la versión real esto se guarda en tu perfil y la home te prioriza estos eventos')">⚽ Fútbol</button>
+        <button class="chip" onclick="toast('En la versión real esto se guarda en tu perfil')">🏀 Básquet</button>
+        <button class="chip" onclick="toast('En la versión real esto se guarda en tu perfil')">🏑 Hockey</button>
+      </div>
+      <div class="chk"><input type="checkbox" id="chk1"><label for="chk1" style="margin:0">Leí y acepto los <a onclick="abrir('modal-tyc')">Términos y la política de reembolsos</a></label></div>
+      <button class="btn btn-o btn-full" onclick="paso('modal-usuario',2)">Crear mi cuenta</button>
+      <p class="switch">¿Ya tenés cuenta? <a onclick="cerrar('modal-usuario'); abrir('modal-ingresar')">Ingresá</a></p>
+    </div>
+    <div class="mstep" data-step="2">
+      <p class="sub" style="margin-bottom:8px">Te enviamos un código por WhatsApp para confirmar tu número.</p>
+      <label>Código de 6 dígitos</label>
+      <input type="text" maxlength="6" placeholder="- - - - - -" style="letter-spacing:8px; text-align:center; font-size:20px">
+      <button class="btn btn-o btn-full" onclick="registroOk()">Confirmar</button>
+    </div>
+    <div class="mstep" data-step="3">
+      <div class="ok-ico">🎉</div>
+      <p class="ok-txt">¡Cuenta creada!<br>Ya podés comprar tus tickets y ver los eventos.</p>
+      <button class="btn btn-o btn-full" onclick="cerrar('modal-usuario')">Ver eventos</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: REGISTRO PRODUCTORA -->
+<div class="modal" id="modal-productora">
+  <div class="mbox">
+    <button class="mclose" onclick="cerrar('modal-productora')">✕</button>
+    <span class="demo-tag">DEMO</span>
+    <h3>Registro de productora</h3>
+    <p class="sub">Revisamos cada solicitud para cuidar la calidad de la plataforma.</p>
+    <div class="mstep on" data-step="1">
+      <label>Nombre comercial</label><input type="text" placeholder="Ej: Producciones del Valle">
+      <label>CUIT (opcional)</label><input type="text" placeholder="30-12345678-9">
+      <label>Responsable</label><input type="text" placeholder="Nombre y apellido">
+      <label>WhatsApp de contacto</label><input type="tel" placeholder="Ej: 11 2345 6789">
+      <label>Email</label><input type="email" placeholder="contacto@tuproduccion.com">
+      <label>¿Qué contenidos producís?</label><textarea rows="3" placeholder="Ej: fútbol de la liga local, básquet, hockey, eventos culturales..."></textarea>
+      <button class="btn btn-o btn-full" onclick="paso('modal-productora',2)">Enviar solicitud</button>
+    </div>
+    <div class="mstep" data-step="2">
+      <div class="ok-ico">🐝</div>
+      <p class="ok-txt">¡Solicitud enviada!<br>Te contactamos por WhatsApp para habilitarte tu cuenta y tu clave de transmisión.</p>
+      <button class="btn btn-o btn-full" onclick="cerrar('modal-productora')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: COMPRA -->
+<div class="modal" id="modal-comprar">
+  <div class="mbox">
+    <button class="mclose" onclick="cerrar('modal-comprar')">✕</button>
+    <span class="demo-tag">DEMO</span>
+    <h3 id="compra-titulo">Evento</h3>
+    <p class="sub" id="compra-sub"></p>
+    <div class="mstep on" data-step="1">
+      <div style="display:flex; justify-content:space-between; border:1px solid var(--border); border-radius:12px; padding:14px 16px; margin-bottom:6px">
+        <span>Acceso al evento</span><b class="baloo" style="color:var(--orange)" id="compra-precio">$4.000</b>
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:6px" id="compra-incluye">✓ En vivo · ✓ Repetición según disponibilidad · ✓ 1 dispositivo</p>
+      <div class="chk"><input type="checkbox" id="chk2"><label for="chk2" style="margin:0">Conozco y acepto la <a onclick="abrir('modal-tyc')">política de reembolsos</a>: los reclamos de falla se hacen dentro de los primeros 15 minutos de conectado, con captura al WhatsApp de ayuda.</label></div>
+      <button class="btn btn-o btn-full" onclick="paso('modal-comprar',2)">Pagar con Mercado Pago</button>
+    </div>
+    <div class="mstep" data-step="2">
+      <div class="ok-ico">🎫</div>
+      <p class="ok-txt">¡Compra registrada!<br>(En la versión real, acá se abre el checkout de Mercado Pago y al pagar te llega el acceso por WhatsApp.)</p>
+      <button class="btn btn-o btn-full" onclick="cerrar('modal-comprar')">Volver a la home</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TÉRMINOS -->
+<div class="modal" id="modal-tyc">
+  <div class="mbox txto">
+    <button class="mclose" onclick="cerrar('modal-tyc')">✕</button>
+    <h3>Términos, condiciones y reembolsos</h3>
+    <p class="sub">Resumen claro (la versión legal completa se redactará con asesoramiento).</p>
+    <table class="politica">
+      <tr><th>Situación</th><th>Resolución</th></tr>
+      <tr><td>El evento no se transmite por falla de la producción y no queda grabado</td><td><b>Reembolso del 100%</b> automático</td></tr>
+      <tr><td>Falla total, pero el evento quedó grabado</td><td>A elección: devolución del 100% o <b>ver la repetición al 50% del valor</b></td></tr>
+      <tr><td>Reportás una falla <b>dentro de los primeros 15 minutos</b> de conectado, con captura al WhatsApp</td><td>Lo intentamos corregir en vivo. Si no se corrige, reembolso o repetición</td></tr>
+      <tr><td>Reportás al finalizar, habiendo visto el evento</td><td>Sin reembolso</td></tr>
+      <tr><td>Estuviste más de 60 minutos conectado con la señal estable</td><td>Sin reembolso (el sistema registra la conexión como comprobante)</td></tr>
+    </table>
+    <p style="font-size:13.5px; color:var(--muted)">Cada acceso es personal y funciona en un solo dispositivo a la vez. La repetición queda disponible por el plazo que informe la productora. La señal en vivo puede demorarse algunos segundos respecto a la radio o al estadio.</p>
+    <button class="btn btn-g btn-full" onclick="cerrar('modal-tyc')">Entendido</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ====== DATOS DE EJEMPLO ======
+   c1/c2 = colores de los clubes (los usa la plantilla del flyer)
+   e1/e2 = iniciales para el escudo provisorio (en producción: PNG del escudo)
+   vivo  = en producción lo decide el sistema (si la señal RTMP está activa), no se tipea a mano */
+const EVENTOS = [
+  {t1:"Atlético Central", t2:"Defensores del Norte", cat:"Primera", deporte:"futbol", fecha:"Hoy 21:00", lugar:"Estadio Municipal", precio:4000, vivo:true, mirando:187, c1:"#c8102e", c2:"#450a0a", e1:"AC", e2:"DN"},
+  {t1:"Riverside", t2:"Old Boys", cat:"Básquet", deporte:"basquet", fecha:"Mié 21:00", lugar:"Gimnasio Riverside", precio:3500, c1:"#ea580c", c2:"#7c2d12", e1:"RI", e2:"OB"},
+  {t1:"Club Belgrano", t2:"Sp. Independencia", cat:"Sub-17", deporte:"futbol", fecha:"Dom 15:00", lugar:"Cancha de Belgrano", precio:3000, c1:"#1e40af", c2:"#172554", e1:"CB", e2:"SI"},
+  {t1:"Dep. Sur", t2:"Unión Oeste", cat:"Femenino", deporte:"futbol", fecha:"Dom 17:30", lugar:"Predio Dep. Sur", precio:3000, c1:"#7c3aed", c2:"#3b0764", e1:"DS", e2:"UO"},
+  {t1:"Hockey Club", t2:"Las Halcones", cat:"Hockey · Damas", deporte:"hockey", fecha:"Vie 20:00", lugar:"Canchas Hockey Club", precio:2500, c1:"#059669", c2:"#064e3b", e1:"HC", e2:"LH"},
+];
+const REPETICIONES = [
+  {t1:"Atlético Central", t2:"Juventud Unida", cat:"Primera", fecha:"Fecha 12", lugar:"Estadio Municipal", precio:2000, vence:"7 días", c1:"#0ea5e9", c2:"#0c4a6e", e1:"AC", e2:"JU"},
+  {t1:"Dep. Sur", t2:"Centro Español", cat:"Femenino", fecha:"Fecha 11", lugar:"Predio Dep. Sur", precio:1500, vence:"5 días", c1:"#7c3aed", c2:"#3b0764", e1:"DS", e2:"CE"},
+  {t1:"Riverside", t2:"Gimnasia Sur", cat:"Básquet", fecha:"Fecha 9", lugar:"Gimnasio Riverside", precio:1500, vence:"3 días", c1:"#ea580c", c2:"#7c2d12", e1:"RI", e2:"GS"},
+];
+let sesion = null;
+
+/* ====== PLANTILLA DE FLYER (la "matriz": el sistema arma todo, el productor solo aporta datos y escudos) ====== */
+function flyer(e, esRep){
+  const badge = esRep ? '<span class="rep-badge">REPETICIÓN</span>'
+              : e.vivo ? '<span class="live-badge"><span class="dot"></span>EN VIVO</span>' : '';
+  return `<div class="flyer" style="background:linear-gradient(135deg,${e.c1},${e.c2})">
+    <div class="flyer-top">${badge}<span class="comp">${e.cat}</span><span class="marca">FULLMEDIA STREAM</span></div>
+    <div class="flyer-mid">
+      <div class="escudo">${e.e1}</div>
+      <div class="names"><b>${e.t1}</b><span>VS</span><b>${e.t2}</b></div>
+      <div class="escudo">${e.e2}</div>
+    </div>
+    <div class="flyer-foot"><span>📅 ${e.fecha}</span><span>📍 ${e.lugar}</span></div>
+  </div>`;
+}
+function tarjeta(e, i, esRep){
+  const btn = esRep ? `<button class="btn btn-g btn-sm" onclick="comprar(${i},true)">Ver ahora</button>`
+             : e.vivo ? `<button class="btn btn-o btn-sm" onclick="comprar(${i})">Comprar y mirar</button>`
+             : `<button class="btn btn-o btn-sm" onclick="comprar(${i})">Comprar</button>`;
+  return `<div class="card ${e.vivo?'ahora':''}">
+    ${flyer(e, esRep)}
+    ${e.vivo ? `<p class="mirando">👥 ${e.mirando} personas lo están mirando</p>` : ''}
+    <div class="card-foot">
+      <span class="precio">$${e.precio.toLocaleString('es-AR')}</span>
+      ${btn}
+    </div>
+  </div>`;
+}
+
+/* ====== FILTROS POR DEPORTE (se guarda el gusto del usuario; en producción vive en su ficha) ====== */
+let filtro = localStorage.getItem('fm-deporte') || 'todos';
+function pintarChips(){
+  document.querySelectorAll('#chips .chip').forEach(c => c.classList.toggle('on', c.dataset.f === filtro));
+}
+function setFiltro(f){
+  filtro = f;
+  localStorage.setItem('fm-deporte', f);
+  pintarChips(); renderGrilla();
+}
+document.querySelectorAll('#chips .chip').forEach(c => c.addEventListener('click', () => setFiltro(c.dataset.f)));
+
+function renderGrilla(){
+  const prog = EVENTOS.map((e,i)=>({e,i})).filter(x => !x.e.vivo && (filtro==='todos' || x.e.deporte===filtro));
+  document.getElementById('grid-eventos').innerHTML = prog.map(x => tarjeta(x.e, x.i, false)).join('') ||
+    '<p style="color:var(--muted)">No hay eventos programados de este deporte por ahora.</p>';
+}
+function renderVivos(){
+  const vivos = EVENTOS.map((e,i)=>({e,i})).filter(x => x.e.vivo);
+  const zona = document.getElementById('zona-vivos');
+  if(!vivos.length){ zona.innerHTML=''; return; }
+  zona.innerHTML = `<h3 class="live-title"><span class="dot"></span> EN VIVO AHORA <small>· comprá y entrás al minuto</small></h3>
+    <div class="grid" style="margin-bottom:34px">${vivos.map(x => tarjeta(x.e, x.i, false)).join('')}</div>`;
+}
+document.getElementById('grid-repeticiones').innerHTML = REPETICIONES.map((e,i) => tarjeta(e,i,true)).join('');
+
+/* ====== HERO DINÁMICO: si hay evento en vivo lo muestra con urgencia; si no, próximo evento con cuenta regresiva ====== */
+function renderHero(){
+  const h = document.getElementById('hero');
+  const vivo = EVENTOS.find(e => e.vivo);
+  if(vivo){
+    h.innerHTML = `
+      <span class="badge live"><span class="dot"></span> ESTÁN TRANSMITIENDO AHORA</span>
+      <h1>${vivo.t1} <span class="vs">vs</span> ${vivo.t2}</h1>
+      <p class="meta">${vivo.cat} · El partido ya empezó · 👥 ${vivo.mirando} personas lo están mirando</p>
+      <div class="compra">
+        <span class="precio-gde">$${vivo.precio.toLocaleString('es-AR')} <small>/ entrás ahora</small></span>
+        <button class="btn btn-o" onclick="comprar(${EVENTOS.indexOf(vivo)})">Comprar y mirar</button>
+        <span class="meta" style="margin:0">Pagás y entrás en menos de 1 minuto</span>
+      </div>`;
+    document.getElementById('hero-media').innerHTML =
+      `<div class="hvivo"><span class="dot"></span> EN VIVO</div><div class="play"></div><span>Señal en vivo</span>`;
+  } else {
+    const proximo = EVENTOS.find(e => !e.vivo);
+    const objetivo = proximoSabado();
+    h.innerHTML = `
+      <span class="badge"><span class="dot"></span> PRÓXIMO EVENTO</span>
+      <h1>${proximo.t1} <span class="vs">vs</span> ${proximo.t2}</h1>
+      <p class="meta">${proximo.cat} · ${objetivo.toLocaleDateString('es-AR',{weekday:'long', day:'numeric', month:'long'})} 21:00 hs · ${proximo.lugar}</p>
+      <div class="count" id="count"></div>
+      <div class="compra">
+        <span class="precio-gde">$${proximo.precio.toLocaleString('es-AR')} <small>/ acceso completo</small></span>
+        <button class="btn btn-o" onclick="comprar(${EVENTOS.indexOf(proximo)})">Comprar ticket</button>
+        <a class="btn btn-g" href="#como">¿Cómo veo?</a>
+      </div>`;
+    setInterval(() => {
+      let s = Math.max(0, Math.floor((objetivo - new Date())/1000));
+      const dd=Math.floor(s/86400); s-=dd*86400;
+      const hh=Math.floor(s/3600); s-=hh*3600;
+      const mm=Math.floor(s/60); s-=mm*60;
+      const c = document.getElementById('count');
+      if(c) c.innerHTML = `<div><b>${dd}</b><span>días</span></div><div><b>${hh}</b><span>hs</span></div><div><b>${mm}</b><span>min</span></div><div><b>${s}</b><span>seg</span></div>`;
+    }, 1000);
+  }
+}
+function proximoSabado(){
+  const d = new Date(); const t = new Date(d);
+  t.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7));
+  t.setHours(21,0,0,0);
+  if(t <= d) t.setDate(t.getDate()+7);
+  return t;
+}
+
+/* ====== MODALES Y FLUJOS ====== */
+function abrir(id){ document.getElementById(id).classList.add('open'); }
+function cerrar(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); }));
+function paso(id, n){ document.querySelectorAll('#'+id+' .mstep').forEach(s => s.classList.toggle('on', s.dataset.step == n)); }
+function abrirIngresar(){
+  if(sesion){ toast('Ya iniciaste sesión, ¡a mirar! 🐝'); return; }
+  paso('modal-ingresar',1); abrir('modal-ingresar');
+}
+function loginOk(){
+  sesion = {nombre:'Usuario'};
+  document.getElementById('btn-sesion').textContent = 'Mis eventos';
+  paso('modal-ingresar',3);
+}
+function registroOk(){
+  sesion = {nombre: document.getElementById('reg-nombre').value || 'Usuario'};
+  document.getElementById('btn-sesion').textContent = 'Mis eventos';
+  paso('modal-usuario',3);
+}
+function comprar(i, esRep){
+  if(!sesion){ toast('Primero creá tu cuenta o iniciá sesión (tarda 1 minuto)'); abrirIngresar(); return; }
+  const e = esRep ? REPETICIONES[i] : EVENTOS[i];
+  document.getElementById('compra-titulo').textContent = e.t1 + ' vs ' + e.t2;
+  document.getElementById('compra-sub').textContent = (e.vivo ? '🔴 EN VIVO AHORA · ' : (esRep ? 'Repetición · ' : 'En vivo · ')) + e.cat + ' · ' + e.fecha + ' · ' + e.lugar;
+  document.getElementById('compra-precio').textContent = '$' + e.precio.toLocaleString('es-AR');
+  document.getElementById('compra-incluye').textContent = e.vivo
+    ? '✓ El partido ya empezó: comprás y entrás al minuto · ✓ 1 dispositivo · ✓ Si queda grabado, podés repasarlo'
+    : '✓ En vivo · ✓ Repetición según disponibilidad · ✓ 1 dispositivo';
+  paso('modal-comprar',1); abrir('modal-comprar');
+}
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> t.classList.remove('show'), 3800);
+}
+
+/* ====== ARRANQUE ====== */
+pintarChips();
+renderGrilla();
+renderVivos();
+renderHero();
+</script>
+</body>
+</html>
