@@ -62,9 +62,17 @@ input{width:100%;max-width:360px;background:#0e0e10;border:1px solid var(--borde
   <h2>👥 Usuarios registrados</h2>
   <div class="card" id="lista-usuarios"></div>
 
-  <h2>📺 Eventos</h2>
+    <h2>📺 Eventos</h2>
   <p class="sub" style="margin-bottom:12px">Los base de la demo + los creados por productoras.</p>
   <div class="card" id="lista-eventos"></div>
+
+  <h2>⚙️ Configuración</h2>
+  <div class="card">
+    <label>Link del instructivo de transmisión (lo ven las productoras en "Mi clave RTMP")</label>
+    <input type="url" id="cfg-instructivo" placeholder="https://docs.google.com/document/...">
+    <button class="btn btn-o" style="margin-top:10px" onclick="guardarInstructivo()">Guardar link</button>
+    <p class="sub" style="margin-top:8px">Actualizá el panel cuando quieras: guardás el link nuevo y se aplica al instante para todas las productoras, sin tocar código.</p>
+  </div>
 </div>
 
 <div id="toast"></div>
